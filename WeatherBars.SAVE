@@ -1,0 +1,58 @@
+[Rainmeter]
+; This section contains general settings that can be used to change how Rainmeter behaves.
+Update=100000
+
+[Metadata]
+; Contains basic information of the skin.
+Name=WeatherBars
+Author=pries
+Information=My weather 7-day forecast using data from forecast.io.
+License=Creative Commons BY-NC-SA 3.0
+Version=1.0.0
+
+[Variables]
+; Variables declared here can be used later on between two # characters (e.g. #MyVariable#).
+weatherFile='C:\Users\Peter\Documents\Rainmeter\Skins\peter1\weatherbars\weather.txt'
+fontName=Trebuchet MS
+colorBar=235,170,0,255
+colorText="#33b5e5"
+
+; ----------------------------------
+; STYLES are used to "centralize" options
+; ----------------------------------
+
+[styleLeftText]
+StringAlign=Left
+StringCase=None
+StringStyle=Bold
+StringEffect=Shadow
+FontEffectColor=0,0,0,20
+FontColor=#colorText#
+FontFace=#fontName#
+FontSize=9
+AntiAlias=1
+ClipString=1
+
+; ----------------------------------
+; MEASURE
+; ----------------------------------
+[measureWeatherBarsScript]
+Measure=Plugin
+Plugin=QuotePlugin
+PathName="#weatherFile#"
+Separator=¶
+UpdateDivider=3600
+OnChangeAction=[!UpdateMeter "meterDays"][!Redraw]
+
+; ----------------------------------
+; METERS display images, text, bars, etc.
+; ----------------------------------
+[meterDays]
+Meter=String
+MeterStyle=styleLeftText
+X=0
+Y=50
+W=240
+H=300
+DynamicVariables=1
+Text="[measureWeatherBarsScript]"
